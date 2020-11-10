@@ -1,0 +1,81 @@
+actions:
+- action_get_jobs
+- utter_ask_field
+- utter_ask_howlong
+- utter_ask_jobtype
+- utter_ask_location
+- utter_did_that_help
+- utter_goodbye
+- utter_greet
+entities:
+- field
+- job_type
+- location
+- p_age
+intents:
+- area_of_interest
+- start:
+    trigger: action_restart
+- state:
+    triggers: action_get_jobs
+- affirm
+- job_type
+- how_long
+- greet
+- goodbye
+- deny
+- mood_great
+- mood_unhappy
+responses:
+  utter_default:
+  - text: Your last statement was not clear.
+  utter_revert:
+  - text: Please, can you rephrase your last sentence.
+  utter_ask_field:
+  - text: Which Job title, keword , company are you lookin for 👩🏾‍🏭 e.g programming ,management, teaching etc.
+  utter_ask_howlong:
+  - buttons:
+    - payload: /how_long{"p_age":"None"}
+      title: All Jobs
+    - payload: /how_long{"p_age":"7"}
+      title: Last 7days
+    - payload: /how_long{"p_age":"14"}
+      title: Last 2 weeks
+    text: How recent do you want your search to be 🕐?
+  utter_ask_jobtype:
+  - buttons:
+    - payload: '/job_type{"job_type": "None"}'
+      title: All
+    - payload: '/job_type{\"job_type\": \"parttime\"}'
+      title: PartTime
+    - payload: '/job_type{\"job_type\": \"internship\"}'
+      title: Internship
+    text: You are looking a/an {field} Job.Which Contract Type are you looking at? 🛠️ 
+  utter_ask_location:
+  - text: Which state do you reside 🏠 .
+  utter_did_that_help:
+  - text: Did that help you?
+  utter_greet:
+  - text: Hey! , welcome to finders keepers 🥳. 
+  utter_goodbye:
+  - text: Click , on any of the links above to apply for any {field} vacancy of you choice. 😉
+  utter_assurance:
+  - text: Please wait while I carry out the Job search for you. ?????
+session_config:
+  carry_over_slots_to_new_session: false
+  session_expiration_time: 8
+slots:
+  field:
+    type: text
+  job_type:
+    initial_value: None
+    type: text
+  location:
+    type: text
+  p_age:
+    initial_value: '0'
+    type: text
+  jobs_gotten:
+    initial_value: 'false'
+    type: text
+    
